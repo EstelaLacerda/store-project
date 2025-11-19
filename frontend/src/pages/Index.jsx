@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import "./style/Index.css";
 
 export default function Index() {
+    const navigate = useNavigate();
+
     return (
         <div className="full-screen-layout">
             <Header />
@@ -17,7 +20,17 @@ export default function Index() {
                     </form>
                 </div>
                 <div className="side-b">
-                    B
+                    <span className="side-title">
+                        Novo por aqui?
+                    </span>
+                    <p className="side-description">
+                        Cadastre-se e comece a usar nossos serviços agora mesmo!
+                    </p>
+                    <button
+                        onClick={() => navigate('/cadastro')}
+                        className="register-button">
+                        Cadastrar
+                    </button>
                 </div>
             </div>
         </div>
