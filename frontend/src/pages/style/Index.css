@@ -112,3 +112,24 @@ body {
 .register-button:hover {
     background-color: #005bb5;
 }
+
+/* --- NOVOS ESTILOS ADICIONADOS PARA O LINK --- */
+
+.forgot-password-container {
+    width: 80%; /* Mesma largura dos inputs para alinhar */
+    text-align: right; /* Joga o texto para a direita */
+    margin-bottom: -5px; /* Ajuste fino para não ficar longe do botão */
+}
+
+.forgot-password-link {
+    color: #bfff00; /* Cor verde neon que você usou no outro arquivo */
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-family: 'Courier New', Courier, monospace;
+    transition: color 0.3s ease;
+}
+
+.forgot-password-link:hover {
+    color: #ffffff; /* Fica branco ao passar o mouse */
+    text-decoration: underline;
+}

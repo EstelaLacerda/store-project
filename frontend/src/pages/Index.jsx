@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Header from "../components/Header";
 import "./style/Index.css";
 
@@ -16,6 +16,14 @@ export default function Index() {
                     <form className="login-form">
                         <input type="text" placeholder="Usuário" className="input-field" />
                         <input type="password" placeholder="Senha" className="input-field" />
+                        
+                        {/* Adicionei classes aqui ao invés de style inline */}
+                        <div className="forgot-password-container">
+                            <Link to="/change-password" className="forgot-password-link">
+                                Esqueceu a senha?
+                            </Link>
+                        </div>
+
                         <button type="submit" className="submit-button">Entrar</button>
                     </form>
                 </div>
