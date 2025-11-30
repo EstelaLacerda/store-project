@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import './style/Logged.css';
 import Footer from '../components/Footer';
+import requestApi from "../api/requestApi";
+import './style/Logged.css';
 
 export default function Logged() {
 
     const navigate = useNavigate();
-
     const [userInfo, setUserInfo] = useState(null);
-
-    useEffect(() => {
-        const storedUser = localStorage.getItem("user");
-
-        if (!storedUser) {
-            alert("Você precisa estar logado para acessar esta página!");
-            navigate("/");
-            return;
-        }
-
-        setUserInfo(JSON.parse(storedUser));
-    }, [navigate]);
+    const [requests, setRequests] = useState([]);
 
     const servicesDB = {
         "formatacao": { label: "Formatação de Computador", price: 50.00, days: 2 },
@@ -30,18 +19,30 @@ export default function Logged() {
         "limpeza": { label: "Limpeza Física Interna", price: 70.00, days: 1 }
     };
 
-    const [requests, setRequests] = useState([
-        { id: 2025001, date: '30/09/2025', service: 'Instalação de Software Básico', status: 'CONCLUÍDO', price: 'R$ 50,00', deadline: '02/10/2025' },
-        { id: 2025002, date: '09/10/2025', service: 'Configuração de Rede', status: 'EM ANDAMENTO', price: 'R$ 120,00', deadline: '14/10/2025' },
-        { id: 2025003, date: '14/10/2025', service: 'Backup e Restauração', status: 'AGUARDANDO APROVAÇÃO', price: 'R$ 80,00', deadline: '17/10/2025' }
-    ]);
-
     const [selectedKey, setSelectedKey] = useState("");
     const [formValues, setFormValues] = useState({
         price: "R$ 0,00",
         days: "0 Dias Úteis",
         deadline: "DD/MM/AAAA"
     });
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+
+        if (!storedUser) {
+            alert("Você precisa estar logado!");
+            navigate("/");
+            return;
+        }
+
+        const parsed = JSON.parse(storedUser);
+        setUserInfo(parsed.user);
+
+        // Carregar requests do BD
+        requestApi.getUserRequests(parsed.user.id).then(res => {
+            setRequests(res.data);
+        });
+    }, [navigate]);
 
     const calculateDeadline = (daysToAdd) => {
         const date = new Date();
@@ -53,47 +54,46 @@ export default function Logged() {
         const key = e.target.value;
         setSelectedKey(key);
 
-        if (key && servicesDB[key]) {
-            const svc = servicesDB[key];
-            setFormValues({
-                price: `R$ ${svc.price.toFixed(2).replace('.', ',')}`,
-                days: `${svc.days} Dias Úteis`,
-                deadline: calculateDeadline(svc.days)
-            });
-        } else {
+        if (!key) {
             setFormValues({ price: "R$ 0,00", days: "0 Dias Úteis", deadline: "DD/MM/AAAA" });
-        }
-    };
-
-    const handleAddRequest = () => {
-        if (!selectedKey) {
-            alert("Por favor, selecione um serviço!");
             return;
         }
 
-        const newRequest = {
-            id: 2025000 + requests.length + 1,
-            date: new Date().toLocaleDateString('pt-BR'),
-            service: servicesDB[selectedKey].label,
-            status: 'EM ELABORAÇÃO',
+        const svc = servicesDB[key];
+        setFormValues({
+            price: `R$ ${svc.price.toFixed(2).replace('.', ',')}`,
+            days: `${svc.days} Dias Úteis`,
+            deadline: calculateDeadline(svc.days)
+        });
+    };
+
+    const handleAddRequest = async () => {
+        if (!selectedKey) return alert("Selecione um serviço!");
+
+        const svc = servicesDB[selectedKey];
+
+        const payload = {
+            userId: userInfo.id,
+            service: svc.label,
+            status: "EM ELABORAÇÃO",
             price: formValues.price,
-            deadline: formValues.deadline
+            deadline: formValues.deadline,
+            date: new Date().toLocaleDateString("pt-BR")
         };
 
-        setRequests([...requests, newRequest]);
+        const res = await requestApi.createRequest(payload);
 
+        setRequests(prev => [...prev, res.data]);
         setSelectedKey("");
         setFormValues({ price: "R$ 0,00", days: "0 Dias Úteis", deadline: "DD/MM/AAAA" });
     };
 
-    const handleDelete = (idToDelete) => {
-        const updatedList = requests.filter(req => req.id !== idToDelete);
-        setRequests(updatedList);
+    const handleDelete = async (id) => {
+        await requestApi.deleteRequest(id);
+        setRequests(prev => prev.filter(req => req.id !== id));
     };
 
-    if (!userInfo) {
-        return null;
-    }
+    if (!userInfo) return null;
 
     return (
         <div className="logged-page">
@@ -103,27 +103,21 @@ export default function Logged() {
 
                 <section className="logged-card user-info">
                     <h2 className="card-title">Usuário Logado</h2>
-                    <p>Nome: <span className="user-highlight">{userInfo.user.nome}</span></p>
-                    <p>Login (E-mail): <span className="user-highlight">{userInfo.user.email}</span></p>
+                    <p>Nome: <span className="user-highlight">{userInfo.nome}</span></p>
+                    <p>Login (E-mail): <span className="user-highlight">{userInfo.email}</span></p>
                 </section>
 
                 <section className="logged-card">
-                    <h2 className="card-title">Nova Solicitação de Serviço de TI</h2>
+                    <h2 className="card-title">Nova Solicitação</h2>
 
                     <div className="form-grid">
                         <div className="form-group">
                             <label>Serviço de TI:</label>
-                            <select
-                                className="logged-input"
-                                value={selectedKey}
-                                onChange={handleServiceChange}
-                            >
-                                <option value="">-- Selecione um Serviço --</option>
-                                <option value="software">Instalação de Software Básico</option>
-                                <option value="formatacao">Formatação de Computador</option>
-                                <option value="rede">Configuração de Rede</option>
-                                <option value="backup">Backup e Restauração</option>
-                                <option value="limpeza">Limpeza Física Interna</option>
+                            <select className="logged-input" value={selectedKey} onChange={handleServiceChange}>
+                                <option value="">-- Selecione --</option>
+                                {Object.keys(servicesDB).map(key => (
+                                    <option key={key} value={key}>{servicesDB[key].label}</option>
+                                ))}
                             </select>
                         </div>
 
@@ -133,46 +127,37 @@ export default function Logged() {
                         </div>
 
                         <div className="form-group">
-                            <label>Prazo de Atendimento:</label>
+                            <label>Prazo:</label>
                             <input type="text" className="logged-input" value={formValues.days} disabled />
                         </div>
 
                         <div className="form-group">
-                            <label>Data Prevista de Atendimento:</label>
+                            <label>Data Prevista:</label>
                             <input type="text" className="logged-input" value={formValues.deadline} disabled />
                         </div>
                     </div>
 
-                    <div className="form-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
-                        <div className="form-group">
-                            <label>Status:</label>
-                            <input type="text" className="logged-input" value="EM ELABORAÇÃO" disabled />
-                        </div>
-                        <div className="form-group">
-                            <button className="btn-incluir" onClick={handleAddRequest}>
-                                Incluir Solicitação
-                            </button>
-                        </div>
-                    </div>
+                    <button className="btn-incluir" onClick={handleAddRequest}>Incluir Solicitação</button>
                 </section>
 
                 <section className="logged-card">
-                    <h2 className="card-title">Minhas Solicitações Existentes</h2>
+                    <h2 className="card-title">Minhas Solicitações</h2>
 
                     <table className="requests-table">
                         <thead>
                             <tr>
-                                <th>Data do Pedido</th>
-                                <th>Nº Solicitação</th>
+                                <th>Data</th>
+                                <th>Nº</th>
                                 <th>Serviço</th>
                                 <th>Status</th>
                                 <th>Preço</th>
-                                <th>Data Prevista</th>
+                                <th>Previsto</th>
                                 <th>Ação</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            {requests.map((req) => (
+                            {requests.map(req => (
                                 <tr key={req.id}>
                                     <td>{req.date}</td>
                                     <td>{req.id}</td>
@@ -180,7 +165,7 @@ export default function Logged() {
                                     <td>{req.status}</td>
                                     <td>{req.price}</td>
                                     <td>{req.deadline}</td>
-                                    <td style={{ textAlign: 'center' }}>
+                                    <td>
                                         <button className="btn-excluir" onClick={() => handleDelete(req.id)}>
                                             Excluir
                                         </button>
