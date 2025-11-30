@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import "./style/Register.css";
+import Footer from "../components/Footer";
 
 const validarDigitoCPF = (cpf) => {
     cpf = cpf.replace(/[^\d]+/g, '');
@@ -160,7 +161,7 @@ export default function Register() {
     }, [formData]);
 
     const handleVoltar = () => {
-        navigate('/'); 
+        navigate('/');
     };
 
     return (
@@ -296,6 +297,7 @@ export default function Register() {
                         </form>
                     </div>
                 </div>
+                <Footer />
             </div>
         </>
     );

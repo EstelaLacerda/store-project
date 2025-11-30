@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from "../components/Header";
 import './style/ChangePassword.css';
+import Footer from '../components/Footer';
 
 export default function ChangePassword() {
   const [formData, setFormData] = useState({
@@ -81,25 +82,25 @@ export default function ChangePassword() {
       <Header />
       <div className="cp-content">
         <div className="welcome-text">
-          <h2>Change Your Password</h2>
-          <p>Please enter your email to reset your password</p>
+          <h2>Mude sua Senha</h2>
+          <p>Por favor, informe seu email para mudar sua senha</p>
         </div>
 
         {/* Lista de Requisitos Dinâmica */}
         <div className="password-requirements">
-          <h3>Your password must have:</h3>
+          <h3>Sua senha deve ter:</h3>
           <ul>
             <li className={`req-item ${validations.length ? 'valid' : ''}`}>
-              At least 6 characters
+              Pelo meno 6 caracteres
             </li>
             <li className={`req-item ${validations.upper ? 'valid' : ''}`}>
-              At least one capital letter (A - Z)
+              Pelo menos uma letra maiúscula (A - Z)
             </li>
             <li className={`req-item ${validations.number ? 'valid' : ''}`}>
-              At least one number (0-9)
+              Pelo menos um número (0-9)
             </li>
             <li className={`req-item ${validations.special ? 'valid' : ''}`}>
-              At least one special character (ex: @, #, $, *)
+              Pelo menos um caractere especial (ex:@,#,$,*)
             </li>
           </ul>
         </div>
@@ -121,7 +122,7 @@ export default function ChangePassword() {
             <input
               type={showNewPass ? "text" : "password"}
               name="newPassword"
-              placeholder="New Password"
+              placeholder="Nova senha"
               className="input-field"
               value={formData.newPassword}
               onChange={handleChange}
@@ -141,7 +142,7 @@ export default function ChangePassword() {
             <input
               type={showConfirmPass ? "text" : "password"}
               name="confirmPassword"
-              placeholder="Confirm the Password"
+              placeholder="Confirme a senha"
               className="input-field"
               value={formData.confirmPassword}
               onChange={handleChange}
@@ -170,9 +171,7 @@ export default function ChangePassword() {
         )}
       </div>
 
-      <footer style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
-        Store &copy; 2025
-      </footer>
+      <Footer />
     </div>
   );
 };

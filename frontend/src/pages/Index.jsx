@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import NavItem from "../components/NavItem";
 import "./style/Index.css";
+import Footer from "../components/Footer";
 
 export default function Index() {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ export default function Index() {
 
                         <div className="forgot-password-container">
                             Esqueceu sua senha?
-                            <NavItem onClick={() => navigate('/change-password')} className="forgot-password-link">
+                            <NavItem onClick={() => navigate('/mudar-senha')} className="forgot-password-link">
                                 clique aqui!
                             </NavItem>
                         </div>
@@ -42,6 +43,7 @@ export default function Index() {
                     </button>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

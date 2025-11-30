@@ -1,0 +1,19 @@
+.footer-container {
+    width: 100%;
+    background-color: #0f0f0f;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.logo-Estela {
+    max-height: 95px;
+    width: auto;
+}
+
+.logo-Paulo {
+    max-width: 140px;
+    height: auto;
+}

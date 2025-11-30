@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import './style/Logged.css';
+import Footer from '../components/Footer';
 
 export default function Logged() {
     const userInfo = {
@@ -175,9 +176,7 @@ export default function Logged() {
 
             </main>
 
-            <footer className="logged-footer">
-                Store © 2025
-            </footer>
+            <Footer />
         </div>
     );
 }

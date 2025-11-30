@@ -1,3 +1,4 @@
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import './style/About.css';
 
@@ -7,7 +8,7 @@ export default function About() {
       <Header />
 
       <main className="about-container">
-        
+
         <section className="about-section">
           <h2 className="section-title">Nossa História</h2>
           <p className="about-text">
@@ -29,15 +30,15 @@ export default function About() {
             <div className="team-img-box">Foto do escritório</div>
             <div className="team-img-box">Foto da equipe 2</div>
           </div>
-          <div style={{textAlign: 'center', marginTop: '10px', color: '#888'}}>
-             Foto de um detalhe do ambiente
+          <div style={{ textAlign: 'center', marginTop: '10px', color: '#888' }}>
+            Foto de um detalhe do ambiente
           </div>
         </section>
 
         <section className="about-section">
           <h2 className="section-title">Nossos Serviços de TI</h2>
           <div className="services-grid">
-            
+
             <div className="service-card">
               <h3>Consultoria Estratégica</h3>
               <p>Lorem ipsum dolor sit amet. At cupiditate voluptates qui consectetur voluptates qui corporis expedita ut atque explicabo.</p>
@@ -88,32 +89,7 @@ export default function About() {
 
       </main>
 
-      <footer className="about-footer">
-        <div className="footer-content">
-          <div className="footer-section">
-            <h4>Contato</h4>
-            <p>✉ contato@techsolutions.com</p>
-            <p>📞 (00) 1234-5678</p>
-            <p>💬 (00) 91234-5678</p>
-          </div>
-
-          <div className="footer-section">
-            <h4>Endereço</h4>
-            <p>Av. Cais do Apolo, 77, Recife Antigo</p>
-            <p>Recife, PE, CEP 00000-000</p>
-          </div>
-
-          <div className="footer-section">
-            <h4>Pagamento</h4>
-            <div style={{fontSize: '2rem'}}>
-               💳 💳 💠 ||||
-            </div>
-          </div>
-        </div>
-        <div className="copyright">
-          Tech Solutions © 2025
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
