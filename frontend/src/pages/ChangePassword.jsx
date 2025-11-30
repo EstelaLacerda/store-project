@@ -32,7 +32,7 @@ export default function ChangePassword() {
     setMessage({ text: '', type: '' });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage({ text: '', type: '' });
 
@@ -54,28 +54,35 @@ export default function ChangePassword() {
       return;
     }
 
-    if (/[¨\{\}\[\]´`~\^:;<>,“”‘']/.test(newPassword)) {
-      setMessage({ text: 'A senha contém caracteres não suportados.', type: 'error' });
-      return;
-    }
+    try {
+      const response = await fetch("http://localhost:3001/api/users/change-password", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, newPassword })
+      });
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const userIndex = users.findIndex(user => user.username === email || user.email === email);
+      const data = await response.json();
 
-    if (userIndex === -1) {
-      setMessage({ text: 'Usuário não encontrado com este e-mail.', type: 'error' });
-    } else {
-      users[userIndex].password = newPassword;
-      localStorage.setItem('users', JSON.stringify(users));
+      if (!response.ok) {
+        setMessage({ text: data.message, type: 'error' });
+        return;
+      }
 
-      setMessage({ text: 'Senha alterada com sucesso! ✅', type: 'success' });
+      setMessage({ text: "Senha alterada com sucesso! ✅", type: 'success' });
 
       setTimeout(() => {
         handleClear();
-        window.location.href = '/';
+        window.location.href = "/";
       }, 2000);
+
+    } catch (error) {
+      console.error(error);
+      setMessage({ text: "Erro ao alterar senha.", type: "error" });
     }
   };
+
 
   return (
     <div className="change-pass-container">

@@ -1,4 +1,3 @@
-// controllers/userController.js
 import User from "../models/user.js";
 
 export async function register(req, res) {
@@ -29,4 +28,24 @@ export async function update(req, res) {
 export async function remove(req, res) {
     await User.destroy({ where: { id: req.params.id } });
     return res.json({ message: "Removido!" });
+}
+
+export async function changePassword(req, res) {
+    try {
+        const { email, newPassword } = req.body;
+
+        const user = await User.findOne({ where: { email } });
+
+        if (!user) {
+            return res.status(404).json({ message: "Usuário não encontrado!" });
+        }
+
+        user.senha = newPassword;
+        await user.save();
+
+        return res.json({ message: "Senha alterada com sucesso!" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Erro ao alterar senha." });
+    }
 }

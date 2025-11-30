@@ -38,7 +38,6 @@ export default function Logged() {
         const parsed = JSON.parse(storedUser);
         setUserInfo(parsed.user);
 
-        // Carregar requests do BD
         requestApi.getUserRequests(parsed.user.id).then(res => {
             setRequests(res.data);
         });
