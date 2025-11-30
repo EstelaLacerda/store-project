@@ -156,9 +156,41 @@ export default function Register() {
             }
         }
 
-        alert('Validação bem-sucedida! Prosseguindo para o registro (A chamada ao Backend seria aqui).');
-        limparFormulario();
+        alert('Validação bem-sucedida!');
+        salvarUsuario();
     }, [formData]);
+
+    const salvarUsuario = async () => {
+        try {
+            const response = await fetch("http://localhost:3001/api/users", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                    senha: formData.senha,
+                    nome: formData.nome,
+                    cpf: formData.cpf,
+                    dataNascimento: formData.dataNascimento,
+                    celular: formData.celular,
+                    estadoCivil: formData.estadoCivil,
+                    escolaridade: formData.escolaridade
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error("Erro ao cadastrar usuário");
+            }
+
+            alert("Usuário cadastrado com sucesso!");
+            limparFormulario();
+            navigate("/");
+        } catch (error) {
+            alert("Erro no registro: " + error.message);
+        }
+    };
+
 
     const handleVoltar = () => {
         navigate('/');

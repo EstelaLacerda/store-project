@@ -1,18 +1,37 @@
-'use strict';
+import { DataTypes } from "sequelize";
+import sequelize from "../config/database.js";
+import User from "./user.js";
 
-export default (sequelize, DataTypes) => {
-    const Request = sequelize.define('Request', {
-        userId: DataTypes.INTEGER,
-        service: DataTypes.STRING,
-        status: DataTypes.STRING,
-        price: DataTypes.STRING,
-        deadline: DataTypes.STRING,
-        date: DataTypes.STRING
-    });
+const Request = sequelize.define(
+    "Request",
+    {
+        service: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        status: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        price: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        deadline: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        date: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
+    },
+    {
+        tableName: "requests"
+    }
+);
 
-    Request.associate = models => {
-        Request.belongsTo(models.User, { foreignKey: 'userId' });
-    };
+User.hasMany(Request, { foreignKey: "userId" });
+Request.belongsTo(User, { foreignKey: "userId" });
 
-    return Request;
-};
+export default Request;
