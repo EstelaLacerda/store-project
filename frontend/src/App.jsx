@@ -3,6 +3,7 @@ import Index from './pages/Index';
 import Register from './pages/Register';
 import ChangePassword from './pages/changePassword';
 import About from './pages/About';
+import Logged from './pages/Logged';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path='/cadastro' element={<Register />} />
         <Route path='/change-password' element={<ChangePassword />} />
         <Route path='/about' element={<About />} />
+        <Route path='/logged' element={<Logged />} />
       </Routes>
     </Router>
   )

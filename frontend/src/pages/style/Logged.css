@@ -1,0 +1,176 @@
+/* src/pages/style/Logged.css */
+
+.logged-page {
+    --cor-fundo: #0e0e0e;
+    --cor-card: #1E1E1E;
+    --cor-input: #333;
+    --cor-texto: #E0E0E0;
+    --cor-destaque: #bfff00; /* Verde Neon */
+    --cor-perigo: #dc3545;   /* Vermelho para botão excluir */
+
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    min-height: 100vh;
+    font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    flex-direction: column;
+}
+
+.logged-container {
+    max-width: 1200px;
+    width: 95%;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex: 1; 
+}
+
+/* CARDS (Blocos Cinzas) */
+.logged-card {
+    background-color: var(--cor-card);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    border: 1px solid #333;
+}
+
+.card-title {
+    color: var(--cor-destaque);
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444;
+}
+
+/* Informações do Usuário */
+.user-info p {
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
+.user-highlight {
+    color: var(--cor-destaque);
+    font-weight: bold;
+}
+
+/* GRID DO FORMULÁRIO */
+.form-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr; /* Colunas proporcionais */
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+/* Inputs */
+.logged-input {
+    padding: 10px;
+    background-color: var(--cor-input);
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 1rem;
+}
+
+/* Estilo para inputs desabilitados (Preço, Prazo, Data) */
+.logged-input:disabled {
+    background-color: #252525;
+    color: var(--cor-destaque); /* Texto verde */
+    font-weight: bold;
+    border: 1px solid #333;
+    cursor: default;
+}
+
+/* Botão Incluir (Verde Neon) */
+.btn-incluir {
+    background-color: var(--cor-destaque);
+    color: #000;
+    font-weight: bold;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace !important;
+    transition: filter 0.2s;
+    width: 100%;
+    margin-top: 24px; /* Alinha com os inputs */
+}
+
+.btn-incluir:hover {
+    filter: brightness(0.9);
+}
+
+/* TABELA */
+.requests-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #252525;
+}
+
+.requests-table th {
+    background-color: #333;
+    color: var(--cor-destaque);
+    text-align: left;
+    padding: 12px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.requests-table td {
+    padding: 12px;
+    border: 1px solid #444;
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+/* Botão Excluir (Vermelho) */
+.btn-excluir {
+    background-color: var(--cor-perigo);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace !important;
+}
+
+.btn-excluir:hover {
+    background-color: #b02a37;
+}
+
+/* Responsividade para celular */
+@media (max-width: 800px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .requests-table {
+        display: block;
+        overflow-x: auto; /* Rolagem horizontal na tabela no celular */
+    }
+}
+
+/* Footer */
+.logged-footer {
+    background-color: #111;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #333;
+    color: #fff;
+    font-weight: bold;
+}

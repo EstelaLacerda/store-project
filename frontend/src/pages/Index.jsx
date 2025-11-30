@@ -14,7 +14,7 @@ export default function Index() {
                         Bem vindo de Volta!
                     </span>
                     <form className="login-form">
-                        <input type="text" placeholder="Usuário" className="input-field" />
+                        <input type="email" placeholder="E-mail" className="input-field" />
                         <input type="password" placeholder="Senha" className="input-field" />
                         
                         {/* Adicionei classes aqui ao invés de style inline */}
