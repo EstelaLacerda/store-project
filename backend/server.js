@@ -4,6 +4,7 @@ import cors from "cors";
 import sequelize from "./config/database.js";
 import userRoutes from "./routes/userRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(json());
 
 app.use("/api/users", userRoutes);
 app.use("/api/requests", requestRoutes);
+app.use("/auth", authRoutes);
 
 async function start() {
     try {

@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import './style/Logged.css';
 import Footer from '../components/Footer';
 
 export default function Logged() {
-    const userInfo = {
-        name: "cupcake de lacerda oliveira",
-        email: "elo@cesar.school"
-    };
+
+    const navigate = useNavigate();
+
+    const [userInfo, setUserInfo] = useState(null);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+
+        if (!storedUser) {
+            alert("Você precisa estar logado para acessar esta página!");
+            navigate("/");
+            return;
+        }
+
+        setUserInfo(JSON.parse(storedUser));
+    }, [navigate]);
 
     const servicesDB = {
         "formatacao": { label: "Formatação de Computador", price: 50.00, days: 2 },
@@ -78,6 +91,10 @@ export default function Logged() {
         setRequests(updatedList);
     };
 
+    if (!userInfo) {
+        return null;
+    }
+
     return (
         <div className="logged-page">
             <Header />
@@ -86,8 +103,8 @@ export default function Logged() {
 
                 <section className="logged-card user-info">
                     <h2 className="card-title">Usuário Logado</h2>
-                    <p>Nome: <span className="user-highlight">{userInfo.name}</span></p>
-                    <p>Login (E-mail): <span className="user-highlight">{userInfo.email}</span></p>
+                    <p>Nome: <span className="user-highlight">{userInfo.user.nome}</span></p>
+                    <p>Login (E-mail): <span className="user-highlight">{userInfo.user.email}</span></p>
                 </section>
 
                 <section className="logged-card">

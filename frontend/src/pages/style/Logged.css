@@ -6,12 +6,13 @@
     --cor-destaque: #bfff00;
     --cor-perigo: #dc3545;
 
-    background-color: var(--cor-fundo);
+    background-color: #000;
     color: var(--cor-texto);
     min-height: 100vh;
     font-family: 'JetBrains Mono', monospace;
     display: flex;
     flex-direction: column;
+    padding-top: 70px;
 }
 
 .logged-container {
