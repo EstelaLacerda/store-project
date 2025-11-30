@@ -1,5 +1,4 @@
-import React from 'react';
-import Header from '../components/Header'; // Certifique-se que o caminho está certo
+import Header from '../components/Header';
 import './style/About.css';
 
 export default function About() {
@@ -9,7 +8,6 @@ export default function About() {
 
       <main className="about-container">
         
-        {/* Seção 1: Nossa História */}
         <section className="about-section">
           <h2 className="section-title">Nossa História</h2>
           <p className="about-text">
@@ -17,16 +15,13 @@ export default function About() {
           </p>
         </section>
 
-        {/* Seção 2: Vídeo Institucional */}
         <section className="about-section">
           <h2 className="section-title">Vídeo Institucional</h2>
           <div className="video-placeholder">
-            {/* Aqui viria uma tag <iframe> do Youtube futuramente */}
             [Espaço para Vídeo Institucional]
           </div>
         </section>
 
-        {/* Seção 3: Equipe e Escritório */}
         <section className="about-section">
           <h2 className="section-title">Nossa Equipe e Escritório</h2>
           <div className="team-gallery">
@@ -39,7 +34,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Seção 4: Nossos Serviços */}
         <section className="about-section">
           <h2 className="section-title">Nossos Serviços de TI</h2>
           <div className="services-grid">
@@ -62,7 +56,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Seção 5: Fundadores (Tabela) */}
         <section className="about-section">
           <h2 className="section-title">Os Fundadores</h2>
           <table className="founders-table">
@@ -95,7 +88,6 @@ export default function About() {
 
       </main>
 
-      {/* Footer (Rodapé) */}
       <footer className="about-footer">
         <div className="footer-content">
           <div className="footer-section">
@@ -114,7 +106,6 @@ export default function About() {
           <div className="footer-section">
             <h4>Pagamento</h4>
             <div style={{fontSize: '2rem'}}>
-               {/* Ícones simulados com texto ou FontAwesome se tiver */}
                💳 💳 💠 ||||
             </div>
           </div>

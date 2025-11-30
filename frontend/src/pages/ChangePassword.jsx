@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Header from "../components/Header";
-import './style/ChangePassword.css'; // Importando o CSS que criamos
+import './style/ChangePassword.css';
 
 export default function ChangePassword() {
-  // Estados para armazenar os dados do formulário
   const [formData, setFormData] = useState({
     email: '',
     newPassword: '',
     confirmPassword: ''
   });
 
-  // Estados para controlar a visibilidade das senhas (o "olhinho")
   const [showNewPass, setShowNewPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
 
-  // Estado para mensagens de erro/sucesso
   const [message, setMessage] = useState({ text: '', type: '' });
 
-  // Estado calculado para validações (atualiza em tempo real)
   const validations = {
     length: formData.newPassword.length >= 6,
     upper: /[A-Z]/.test(formData.newPassword),
@@ -25,38 +21,32 @@ export default function ChangePassword() {
     special: /[@#\$%&\*!\?\/\-\|\\_\.\+=]/.test(formData.newPassword)
   };
 
-  // Função para atualizar os inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Função para limpar o formulário
   const handleClear = () => {
     setFormData({ email: '', newPassword: '', confirmPassword: '' });
     setMessage({ text: '', type: '' });
   };
 
-  // Função de Envio (Submit)
   const handleSubmit = (e) => {
     e.preventDefault();
     setMessage({ text: '', type: '' });
 
     const { email, newPassword, confirmPassword } = formData;
 
-    // 1. Validar campos vazios
     if (!email || !newPassword || !confirmPassword) {
       setMessage({ text: 'Por favor, preencha todos os campos.', type: 'error' });
       return;
     }
 
-    // 2. Validar se senhas coincidem
     if (newPassword !== confirmPassword) {
       setMessage({ text: 'As senhas não coincidem.', type: 'error' });
       return;
     }
 
-    // 3. Validar Regras de Senha (verifica se todas as validações são true)
     const isPasswordValid = Object.values(validations).every(Boolean);
     if (!isPasswordValid) {
       setMessage({ text: 'A senha não atende aos requisitos de segurança.', type: 'error' });
@@ -68,24 +58,19 @@ export default function ChangePassword() {
       return;
     }
 
-    // 4. Lógica de "Backend" (LocalStorage)
-    // Recupera usuários salvos
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const userIndex = users.findIndex(user => user.username === email || user.email === email);
 
     if (userIndex === -1) {
       setMessage({ text: 'Usuário não encontrado com este e-mail.', type: 'error' });
     } else {
-      // Atualiza a senha
       users[userIndex].password = newPassword;
       localStorage.setItem('users', JSON.stringify(users));
 
       setMessage({ text: 'Senha alterada com sucesso! ✅', type: 'success' });
 
-      // Limpa após sucesso e redireciona (opcional)
       setTimeout(() => {
         handleClear();
-        // Se você usar React Router, seria: navigate('/login')
         window.location.href = '/';
       }, 2000);
     }
@@ -147,7 +132,6 @@ export default function ChangePassword() {
               className="toggle-btn"
               onClick={() => setShowNewPass(!showNewPass)}
             >
-              {/* Usando FontAwesome (assumindo que você tem o link no index.html) */}
               <i className={`fa-solid ${showNewPass ? 'fa-eye-slash' : 'fa-eye'}`}></i>
             </button>
           </div>

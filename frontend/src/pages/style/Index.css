@@ -115,30 +115,18 @@ body {
     background-color: #005bb5;
 }
 
-/* --- NOVOS ESTILOS ADICIONADOS PARA O LINK --- */
-
 .forgot-password-container {
-    width: 80%; /* Mesma largura dos inputs para alinhar */
-    text-align: left; /* Joga o texto para a direita */
-    margin-bottom: -5px; /* Ajuste fino para não ficar longe do botão */
+    width: 80%;
+    text-align: left;
+    margin-bottom: -5px;
     font-size: 0.9rem;
     display: flex;
     justify-content: space-evenly;
 }
 
-.forgot-password-link {
-    color: #bfff00; /* Cor verde neon que você usou no outro arquivo */
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-family: 'JetBrains Mono', monospace;
-    transition: color 0.3s ease;
-}
-
-.forgot-password-link:hover {
-    color: #ffffff; /* Fica branco ao passar o mouse */
-    text-decoration: underline;
-}
-
-input, button, select, textarea {
+input,
+button,
+select,
+textarea {
     font-family: 'JetBrains Mono', monospace !important;
 }

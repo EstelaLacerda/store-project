@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import "./style/Register.css";
 
-// Função auxiliar para validação de CPF (sem mudanças na lógica, apenas encapsulada)
 const validarDigitoCPF = (cpf) => {
     cpf = cpf.replace(/[^\d]+/g, '');
     if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
@@ -20,7 +19,6 @@ const validarDigitoCPF = (cpf) => {
     return true;
 };
 
-// Objeto de estado inicial para o formulário
 const initialState = {
     email: '',
     senha: '',
@@ -37,13 +35,11 @@ export default function Register() {
     const [formData, setFormData] = useState(initialState);
     const navigate = useNavigate();
 
-    // Função genérica para atualizar o estado com base no nome do campo
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    // Função de formatação do CPF
     const formatarCpf = (value) => {
         let cleanValue = value.replace(/\D/g, '');
         cleanValue = cleanValue.replace(/(\d{3})(\d)/, '$1.$2');
@@ -52,7 +48,6 @@ export default function Register() {
         return cleanValue.slice(0, 14);
     };
 
-    // Função de formatação do Celular
     const formatarCelular = (value) => {
         let cleanValue = value.replace(/\D/g, '');
         if (cleanValue.length > 10) {
@@ -66,36 +61,30 @@ export default function Register() {
         }
     };
 
-    // Handler para CPF com formatação
     const handleCpfChange = (e) => {
         const formattedValue = formatarCpf(e.target.value);
         setFormData(prev => ({ ...prev, cpf: formattedValue }));
     };
 
-    // Handler para Celular com formatação
     const handleCelularChange = (e) => {
         const formattedValue = formatarCelular(e.target.value);
         setFormData(prev => ({ ...prev, celular: formattedValue }));
     };
 
-    // Função para limpar o formulário
     const limparFormulario = () => {
         setFormData(initialState);
         document.getElementById('email').focus();
     };
 
-    // Função de validação
     const validarFormulario = useCallback(() => {
         const { email, senha, confirmarSenha, nome, cpf, dataNascimento, celular } = formData;
 
-        // 1. Email
         if (email.trim() === '' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             alert('Por favor, insira um e-mail válido.');
             document.getElementById('email').focus();
             return;
         }
 
-        // 2. Senha
         const regexSenha = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
         if (!regexSenha.test(senha)) {
             alert('A senha não atende aos critérios de segurança. Por favor, verifique as regras.');
@@ -103,14 +92,12 @@ export default function Register() {
             return;
         }
 
-        // 3. Confirmação de Senha
         if (senha !== confirmarSenha) {
             alert('As senhas não coincidem.');
             document.getElementById('confirmarSenha').focus();
             return;
         }
 
-        // 4. Nome
         const nomeTrim = nome.trim();
         const palavrasNome = nomeTrim.split(' ');
         if (nomeTrim === '') {
@@ -130,7 +117,6 @@ export default function Register() {
             return;
         }
 
-        // 5. CPF
         if (cpf.trim() === '') {
             alert('O campo CPF é obrigatório.');
             document.getElementById('cpf').focus();
@@ -142,7 +128,6 @@ export default function Register() {
             return;
         }
 
-        // 6. Data de Nascimento e Idade
         if (dataNascimento.trim() === '') {
             alert('A data de nascimento é obrigatória.');
             document.getElementById('dataNascimento').focus();
@@ -161,7 +146,6 @@ export default function Register() {
             return;
         }
 
-        // 7. Celular (Opcional)
         if (celular.trim() !== '') {
             const celularLimpo = celular.replace(/\D/g, '');
             if (celularLimpo.length < 10 || celularLimpo.length > 11) {
@@ -171,15 +155,12 @@ export default function Register() {
             }
         }
 
-        // Se a validação passar:
         alert('Validação bem-sucedida! Prosseguindo para o registro (A chamada ao Backend seria aqui).');
-        // *** AQUI VOCÊ IMPLEMENTARÁ SUA CHAMADA AO BACKEND (API) PARA CADASTRO ***
         limparFormulario();
     }, [formData]);
 
-    // Função de Voltar
     const handleVoltar = () => {
-        navigate('/'); // Usa o hook navigate para roteamento
+        navigate('/'); 
     };
 
     return (

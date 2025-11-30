@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import NavItem from "../components/NavItem";
 import "./style/Index.css";
 
 export default function Index() {
@@ -16,13 +17,12 @@ export default function Index() {
                     <form className="login-form">
                         <input type="email" placeholder="E-mail" className="input-field" />
                         <input type="password" placeholder="Senha" className="input-field" />
-                        
-                        {/* Adicionei classes aqui ao invés de style inline */}
+
                         <div className="forgot-password-container">
                             Esqueceu sua senha?
-                            <div onClick={() => navigate('/change-password')} className="forgot-password-link">
+                            <NavItem onClick={() => navigate('/change-password')} className="forgot-password-link">
                                 clique aqui!
-                            </div>
+                            </NavItem>
                         </div>
 
                         <button type="submit" className="submit-button">Entrar</button>
