@@ -1,0 +1,171 @@
+/* src/pages/style/About.css */
+
+/* Variáveis para consistência */
+.about-page {
+    --cor-fundo: #0e0e0e; /* Fundo preto da página */
+    --cor-card: #1E1E1E;   /* Fundo cinza dos blocos */
+    --cor-texto: #E0E0E0;
+    --cor-destaque: #bfff00; /* Verde Neon */
+    --borda-fina: #333;
+
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    min-height: 100vh;
+    font-family: 'JetBrains Mono', monospace; /* Sua fonte padrão */
+    display: flex;
+    flex-direction: column;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 40px; /* Espaço entre as seções grandes */
+}
+
+/* Estilo padrão para os "Cards" (História, Vídeo, etc) */
+.about-section {
+    background-color: var(--cor-card);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.section-title {
+    color: var(--cor-destaque);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444;
+}
+
+.about-text {
+    line-height: 1.6;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+/* Seção de Vídeo */
+.video-placeholder {
+    width: 100%;
+    height: 400px;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #333;
+    color: #555;
+}
+
+/* Seção de Equipe (Imagens) */
+.team-gallery {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.team-img-box {
+    flex: 1;
+    height: 200px;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #333;
+    color: #aaa;
+    min-width: 250px;
+}
+
+/* Seção de Serviços (Cards com borda verde) */
+.services-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.service-card {
+    flex: 1;
+    background-color: #141414;
+    padding: 20px;
+    border-left: 5px solid var(--cor-destaque); /* A borda verde lateral */
+    min-width: 280px;
+}
+
+.service-card h3 {
+    color: var(--cor-destaque);
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+.service-card p {
+    font-size: 0.9rem;
+    color: #bbb;
+    line-height: 1.5;
+}
+
+/* Seção de Fundadores (Tabela) */
+.founders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.founders-table th {
+    background-color: var(--cor-destaque);
+    color: #000; /* Texto preto no fundo verde */
+    font-weight: bold;
+    text-align: left;
+    padding: 12px;
+}
+
+.founders-table td {
+    padding: 12px;
+    border: 1px solid #444;
+    font-size: 0.9rem;
+}
+
+.founders-table tr:nth-child(even) {
+    background-color: #252525; /* Listra zebrada sutil */
+}
+
+/* Footer da Página */
+.about-footer {
+    background-color: #111;
+    padding: 40px 20px;
+    border-top: 1px solid #333;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-section h4 {
+    color: var(--cor-destaque);
+    margin-bottom: 15px;
+}
+
+.footer-section p, .footer-section div {
+    color: #fff;
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    color: #888;
+    font-size: 0.8rem;
+}

@@ -1,4 +1,4 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import "./style/Index.css";
 
@@ -19,9 +19,10 @@ export default function Index() {
                         
                         {/* Adicionei classes aqui ao invés de style inline */}
                         <div className="forgot-password-container">
-                            <Link to="/change-password" className="forgot-password-link">
-                                Esqueceu a senha?
-                            </Link>
+                            Esqueceu sua senha?
+                            <div onClick={() => navigate('/change-password')} className="forgot-password-link">
+                                clique aqui!
+                            </div>
                         </div>
 
                         <button type="submit" className="submit-button">Entrar</button>

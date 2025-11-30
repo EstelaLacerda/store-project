@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import Header from "../components/Header";
 import './style/ChangePassword.css'; // Importando o CSS que criamos
 
-const ChangePassword = () => {
+export default function ChangePassword() {
   // Estados para armazenar os dados do formulário
   const [formData, setFormData] = useState({
     email: '',
@@ -63,8 +64,8 @@ const ChangePassword = () => {
     }
 
     if (/[¨\{\}\[\]´`~\^:;<>,“”‘']/.test(newPassword)) {
-        setMessage({ text: 'A senha contém caracteres não suportados.', type: 'error' });
-        return;
+      setMessage({ text: 'A senha contém caracteres não suportados.', type: 'error' });
+      return;
     }
 
     // 4. Lógica de "Backend" (LocalStorage)
@@ -80,27 +81,19 @@ const ChangePassword = () => {
       localStorage.setItem('users', JSON.stringify(users));
 
       setMessage({ text: 'Senha alterada com sucesso! ✅', type: 'success' });
-      
+
       // Limpa após sucesso e redireciona (opcional)
       setTimeout(() => {
         handleClear();
         // Se você usar React Router, seria: navigate('/login')
-        window.location.href = '/'; 
+        window.location.href = '/';
       }, 2000);
     }
   };
 
   return (
     <div className="change-pass-container">
-      {/* Header Simples */}
-      <header className="cp-header">
-        <div className="cp-title">Welcome to the Store</div>
-        <nav className="cp-links">
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-        </nav>
-      </header>
-
+      <Header />
       <div className="cp-content">
         <div className="welcome-text">
           <h2>Change Your Password</h2>
@@ -199,5 +192,3 @@ const ChangePassword = () => {
     </div>
   );
 };
-
-export default ChangePassword;
