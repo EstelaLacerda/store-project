@@ -1,6 +1,11 @@
-import Footer from '../components/Footer';
+import React from 'react';
 import Header from '../components/Header';
 import './style/About.css';
+import Footer from '../components/Footer';
+
+import equipe1Img from '../assets/equipe1.jpg';
+import escritorioImg from '../assets/escritorio.jpg';
+import equipe2Img from '../assets/equipe2.jpg';
 
 export default function About() {
   return (
@@ -19,41 +24,50 @@ export default function About() {
         <section className="about-section">
           <h2 className="section-title">Vídeo Institucional</h2>
           <div className="video-placeholder">
-            [Espaço para Vídeo Institucional]
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/jZkHpNnXLB0"
+              title="Vídeo Institucional"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
           </div>
         </section>
 
         <section className="about-section">
           <h2 className="section-title">Nossa Equipe e Escritório</h2>
           <div className="team-gallery">
-            <div className="team-img-box">Foto da equipe 1</div>
-            <div className="team-img-box">Foto do escritório</div>
-            <div className="team-img-box">Foto da equipe 2</div>
-          </div>
-          <div style={{ textAlign: 'center', marginTop: '10px', color: '#888' }}>
-            Foto de um detalhe do ambiente
+            <div className="team-img-box">
+              <img src={equipe1Img} alt="Foto da equipe 1" className="gallery-img" />
+            </div>
+
+            <div className="team-img-box">
+              <img src={escritorioImg} alt="Foto do escritório" className="gallery-img" />
+            </div>
+
+            <div className="team-img-box">
+              <img src={equipe2Img} alt="Foto da equipe 2" className="gallery-img" />
+            </div>
           </div>
         </section>
 
         <section className="about-section">
           <h2 className="section-title">Nossos Serviços de TI</h2>
           <div className="services-grid">
-
             <div className="service-card">
               <h3>Consultoria Estratégica</h3>
               <p>Lorem ipsum dolor sit amet. At cupiditate voluptates qui consectetur voluptates qui corporis expedita ut atque explicabo.</p>
             </div>
-
             <div className="service-card">
               <h3>Desenvolvimento de Software</h3>
               <p>Lorem ipsum dolor sit amet. At cupiditate voluptates qui consectetur voluptates qui corporis expedita ut atque explicabo.</p>
             </div>
-
             <div className="service-card">
               <h3>Suporte e Manutenção</h3>
               <p>Lorem ipsum dolor sit amet. At cupiditate voluptates qui consectetur voluptates qui corporis expedita ut atque explicabo.</p>
             </div>
-
           </div>
         </section>
 
@@ -90,6 +104,7 @@ export default function About() {
       </main>
 
       <Footer />
+
     </div>
   );
 }

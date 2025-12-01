@@ -93,7 +93,6 @@ export default function ChangePassword() {
           <p>Por favor, informe seu email para mudar sua senha</p>
         </div>
 
-        {/* Lista de Requisitos Dinâmica */}
         <div className="password-requirements">
           <h3>Sua senha deve ter:</h3>
           <ul>
@@ -112,7 +111,6 @@ export default function ChangePassword() {
           </ul>
         </div>
 
-        {/* Formulário */}
         <form className="pass-form" onSubmit={handleSubmit}>
           <input
             type="email"
@@ -124,7 +122,6 @@ export default function ChangePassword() {
             required
           />
 
-          {/* Nova Senha */}
           <div className="password-container">
             <input
               type={showNewPass ? "text" : "password"}
@@ -144,7 +141,6 @@ export default function ChangePassword() {
             </button>
           </div>
 
-          {/* Confirmar Senha */}
           <div className="password-container">
             <input
               type={showConfirmPass ? "text" : "password"}
@@ -170,7 +166,6 @@ export default function ChangePassword() {
           </div>
         </form>
 
-        {/* Área de Mensagem */}
         {message.text && (
           <div className={`message-box ${message.type}`}>
             {message.text}
